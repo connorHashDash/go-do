@@ -76,11 +76,6 @@ func (t *Todos) toggle(index int) error {
       (*t)[index].completedAt = nil
     }
 
-    completionTime := time.Now()
-
-
-    (*t)[index].completedAt = &completionTime
-
     return nil
   }
 
