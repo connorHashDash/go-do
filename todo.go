@@ -68,16 +68,23 @@ func (t *Todos) toggle(index int) error {
     return err
   } else {
     (*t)[index].completed = !(*t)[index].completed
-
     if (*t)[index].completed == true {
       completionTime := time.Now()
       (*t)[index].completedAt = &completionTime
     } else {
       (*t)[index].completedAt = nil
     }
+    return nil
+  }
+}
+
+func (t *Todos) edit(index int, name string) error {
+  if err :=  t.validateIndex(index); err != nil {
+    return err
+  } else {
+    (*t)[index].name = name
 
     return nil
   }
-
 }
 
