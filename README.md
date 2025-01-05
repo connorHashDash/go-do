@@ -1,2 +1,3 @@
-# go-do
-CLI To-do app for leaning Go
+# Go-Do
+
+CLI To-do app written in Go.
