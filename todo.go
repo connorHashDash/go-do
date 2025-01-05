@@ -19,14 +19,18 @@ type Todos []todo
 func (t Todos) formattedPrint() {
   fmt.Println("------")
   for i := 0; i < len(t); i++ {
+    completedAtStr := "nil"
+    if t[i].completedAt != nil {
+      completedAtStr = t[i].completedAt.Format("2006-01-02 15:04:05")
+    }
 fmt.Printf(`Name: %s 
 Completed: %t
-Index: %d
 Created at: %s
 Completed at: %s
+Index: %d
 
 
-`, t[i].name, t[i].completed, i)
+`, t[i].name, t[i].completed,  t[i].createdAt.Format("2006-01-02 15:04:05"), completedAtStr, i)
   }
 }
 
