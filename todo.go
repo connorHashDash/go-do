@@ -4,6 +4,9 @@ import (
   "time"
   "fmt"
   "errors"
+  "os"
+  "github.com/aquasecurity/table"
+  "strconv"
 )
 
 type todo struct {
@@ -88,3 +91,27 @@ func (t *Todos) edit(index int, name string) error {
   }
 }
 
+func (t Todos) tableView() {
+  printedTable := table.New(os.Stdout)
+
+  printedTable.SetAlignment(table.AlignRight, table.AlignRight, table.AlignCenter, table.AlignRight)
+  printedTable.SetHeaders("#", "Name", "Completed", "Created-At", "Completed-At")
+  printedTable.SetDividers(table.UnicodeRoundedDividers)
+
+  for i := 0; i < len(t); i++ {
+    completedAtStr := "nil"
+    if t[i].completedAt != nil {
+      completedAtStr = t[i].completedAt.Format("2006-01-02 15:04:05")
+    }
+    
+    completedIco := "❌"
+    if t[i].completed != false {
+      completedIco =  "✅"
+    }
+
+
+    printedTable.AddRow(strconv.Itoa(i), t[i].name, completedIco, t[i].createdAt.Format("2006-01-02 15:04:05"), completedAtStr)
+  }
+
+  printedTable.Render()
+}
