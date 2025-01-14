@@ -13,5 +13,6 @@ func main() {
   exampleTodos.toggle(1)
 //  exampleTodos.toggle(1)
   exampleTodos.edit(1, "Paint") 
-  exampleTodos.tableView()
+//  exampleTodos.tableView()
+  exampleTodos.save()
 }

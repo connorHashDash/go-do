@@ -10,10 +10,10 @@ import (
 )
 
 type todo struct {
-  name        string
-  completed   bool
-  createdAt   time.Time
-  completedAt *time.Time
+  Name        string `json: "name"`
+  Completed   bool `json: "completed"`
+  CreatedAt   time.Time `json: "created-at"`
+  CompletedAt *time.Time `json: "completed-at"`
 }
 
 type Todos []todo
@@ -23,8 +23,8 @@ func (t Todos) formattedPrint() {
   fmt.Println("------")
   for i := 0; i < len(t); i++ {
     completedAtStr := "nil"
-    if t[i].completedAt != nil {
-      completedAtStr = t[i].completedAt.Format("2006-01-02 15:04:05")
+    if t[i].CompletedAt != nil {
+      completedAtStr = t[i].CompletedAt.Format("2006-01-02 15:04:05")
     }
 fmt.Printf(`Name: %s 
 Completed: %t
@@ -33,15 +33,15 @@ Completed at: %s
 Index: %d
 
 
-`, t[i].name, t[i].completed,  t[i].createdAt.Format("2006-01-02 15:04:05"), completedAtStr, i)
+`, t[i].Name, t[i].Completed,  t[i].CreatedAt.Format("2006-01-02 15:04:05"), completedAtStr, i)
   }
 }
 
 func (t *Todos) add(name string) {
   newTodo := todo{
-    name: name,
-    completed: false,
-    createdAt: time.Now(),
+    Name: name,
+    Completed: false,
+    CreatedAt: time.Now(),
   }
 
     *t = append(*t, newTodo)
@@ -70,12 +70,12 @@ func (t *Todos) toggle(index int) error {
   if err :=  t.validateIndex(index); err != nil {
     return err
   } else {
-    (*t)[index].completed = !(*t)[index].completed
-    if (*t)[index].completed == true {
+    (*t)[index].Completed = !(*t)[index].Completed
+    if (*t)[index].Completed == true {
       completionTime := time.Now()
-      (*t)[index].completedAt = &completionTime
+      (*t)[index].CompletedAt = &completionTime
     } else {
-      (*t)[index].completedAt = nil
+      (*t)[index].CompletedAt = nil
     }
     return nil
   }
@@ -85,7 +85,7 @@ func (t *Todos) edit(index int, name string) error {
   if err :=  t.validateIndex(index); err != nil {
     return err
   } else {
-    (*t)[index].name = name
+    (*t)[index].Name = name
 
     return nil
   }
@@ -100,17 +100,17 @@ func (t Todos) tableView() {
 
   for i := 0; i < len(t); i++ {
     completedAtStr := "nil"
-    if t[i].completedAt != nil {
-      completedAtStr = t[i].completedAt.Format("2006-01-02 15:04:05")
+    if t[i].CompletedAt != nil {
+      completedAtStr = t[i].CompletedAt.Format("2006-01-02 15:04:05")
     }
     
     completedIco := "❌"
-    if t[i].completed != false {
+    if t[i].Completed != false {
       completedIco =  "✅"
     }
 
 
-    printedTable.AddRow(strconv.Itoa(i), t[i].name, completedIco, t[i].createdAt.Format("2006-01-02 15:04:05"), completedAtStr)
+    printedTable.AddRow(strconv.Itoa(i), t[i].Name, completedIco, t[i].CreatedAt.Format("2006-01-02 15:04:05"), completedAtStr)
   }
 
   printedTable.Render()
