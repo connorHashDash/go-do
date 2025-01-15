@@ -33,7 +33,6 @@ func (t *Todos) load() error {
   }
 
   json.Unmarshal(readData, t)
-  fmt.Println(*t)
 
   return nil
 }
