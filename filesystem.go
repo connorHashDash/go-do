@@ -23,3 +23,17 @@ func (t Todos) save() {
 
   os.WriteFile("./todo-list.json", json, 0644)
 }
+
+func (t *Todos) load() error {
+  var readData, err = os.ReadFile("./todo-list.json")
+  if err != nil {
+    fmt.Println("error reading file")
+    fmt.Println(err)
+    return err
+  }
+
+  json.Unmarshal(readData, t)
+  fmt.Println(*t)
+
+  return nil
+}
