@@ -7,5 +7,5 @@ import (
 func main() {
   exampleTodos := Todos{}
   exampleTodos.load()
-  exampleTodos.tableView()
+  exampleTodos.commandParse()
 }
