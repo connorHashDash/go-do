@@ -7,14 +7,12 @@ import (
 )
 
 func (t Todos) toJson() []byte {
-  fmt.Println(t)
   var todoJson, err = json.MarshalIndent(t, "", "  ")
   if err != nil {
     fmt.Println(err)
     return nil
   }
 
-  fmt.Println(string(todoJson))
   return todoJson
 }
 

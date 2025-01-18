@@ -18,25 +18,6 @@ type todo struct {
 
 type Todos []todo
 
-
-func (t Todos) formattedPrint() {
-  fmt.Println("------")
-  for i := 0; i < len(t); i++ {
-    completedAtStr := "nil"
-    if t[i].CompletedAt != nil {
-      completedAtStr = t[i].CompletedAt.Format("2006-01-02 15:04:05")
-    }
-fmt.Printf(`Name: %s 
-Completed: %t
-Created at: %s
-Completed at: %s
-Index: %d
-
-
-`, t[i].Name, t[i].Completed,  t[i].CreatedAt.Format("2006-01-02 15:04:05"), completedAtStr, i)
-  }
-}
-
 func (t *Todos) add(name string) {
   newTodo := todo{
     Name: name,
