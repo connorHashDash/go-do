@@ -80,7 +80,7 @@ func (t Todos) tableView() {
   printedTable.SetDividers(table.UnicodeRoundedDividers)
 
   for i := 0; i < len(t); i++ {
-    completedAtStr := "nil"
+    completedAtStr := ""
     if t[i].CompletedAt != nil {
       completedAtStr = t[i].CompletedAt.Format("2006-01-02 15:04:05")
     }
